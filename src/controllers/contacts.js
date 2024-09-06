@@ -22,7 +22,7 @@ export const getContactByIdController = async (req, res) => {
   const data = await getContactById(id);
 
   if (!data) {
-    throw createHttpError(404, `Movie with id=${id} not found`);
+    throw createHttpError(404, `Contact with id=${id} not found`);
   }
 
   res.json({
