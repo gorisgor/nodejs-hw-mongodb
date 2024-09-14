@@ -24,11 +24,10 @@ export const getAllContacts = async ({
 
   const count = await ContactCollection.countDocuments(filter);
 
-  console.log('log', filter);
   const paginationData = calculatePaginationData({ count, perPage, page });
 
   return {
-    contacts,
+    data,
     page,
     perPage,
     totalItems: count,
