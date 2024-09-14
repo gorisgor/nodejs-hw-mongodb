@@ -1,20 +1,26 @@
+import createHttpError from 'http-errors';
 import { contactTypes } from '../../db/models/Contact.js';
-
-const parseString = (value) => {
-  if (typeof value !== 'string') return '';
-
-  const parsedString = value.trim().toLowerCase();
-  return parsedString;
-};
+import { parseValue } from './parseValue.js';
 
 const parseContactFilterParams = (query) => {
-  const contactType = parseString(query.contactType);
+  const contactType = parseValue(query.contactType);
+  const isFavourite = parseValue(query.isFavourite);
 
   if (contactType && !contactTypes.includes(contactType)) {
-    throw new Error(`Filter values are: ${contactTypes.join(', ')}`);
+    throw createHttpError(
+      400,
+      `Filter values for contactType are: ${contactTypes.join(', ')}`,
+    );
   }
 
-  return contactType ? { contactType } : {};
+  if (isFavourite !== undefined && ![true, false].includes(isFavourite)) {
+    throw createHttpError(400, 'Filter values are true or false');
+  }
+
+  return {
+    contactType: contactType,
+    isFavourite: isFavourite,
+  };
 };
 
 export default parseContactFilterParams;

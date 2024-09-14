@@ -39,4 +39,5 @@ export const sortFields = [
   'updatedAt',
 ];
 export const contactTypes = ['work', 'personal', 'home'];
+
 export default ContactCollection;
