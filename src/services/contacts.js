@@ -7,23 +7,30 @@ export const getAllContacts = async ({
   page,
   sortBy = 'name',
   sortOrder = SORT_ORDER[0],
+  filter = {},
 }) => {
   const skip = (page - 1) * perPage;
 
   const contactQuery = ContactCollection.find();
+
+  if (filter.contactType) {
+    contactQuery.where('contactType').equals(filter.contactType);
+  }
+
   const contacts = await contactQuery
-    .find()
     .skip(skip)
     .limit(perPage)
     .sort({ [sortBy]: sortOrder });
-  const count = await ContactCollection.find().countDocuments();
+
+  const count = await ContactCollection.countDocuments(filter);
+
+  console.log('log', filter);
   const paginationData = calculatePaginationData({ count, perPage, page });
 
   return {
     contacts,
     page,
     perPage,
-    contacts,
     totalItems: count,
     ...paginationData,
   };

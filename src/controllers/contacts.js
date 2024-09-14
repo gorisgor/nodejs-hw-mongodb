@@ -7,17 +7,20 @@ import {
   deleteContact,
 } from '../services/contacts.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
-import { parseSortParams } from '../utils/parseSortParams.js'
+import { parseSortParams } from '../utils/parseSortParams.js';
 import { sortFields } from '../db/models/Contact.js';
+import parseContactFilterParams from '../utils/filters/parseContactFilterParams.js';
 
 export const getAllContactsController = async (req, res) => {
   const { perPage, page } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams({ ...req.query, sortFields });
+  const filter = parseContactFilterParams(req.query);
   const data = await getAllContacts({
     perPage,
     page,
     sortBy,
-    sortOrder
+    sortOrder,
+    filter,
   });
 
   res.json({
@@ -47,7 +50,7 @@ export const addContactController = async (req, res) => {
   if (!name || !phoneNumber || !contactType) {
     throw createHttpError(
       400,
-      'Name, phoneNumber, and contactType valuea are required',
+      'Name, phoneNumber, and contactType values are required',
     );
   }
   const data = await addContact({
