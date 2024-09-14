@@ -9,11 +9,12 @@ const parseString = (value) => {
 
 const parseContactFilterParams = (query) => {
   const contactType = parseString(query.contactType);
-  const parsedContactType = contactTypes.includes(contactType)
-    ? contactType
-    : 'work';
 
-  return { contactType: parsedContactType };
+  if (contactType && !contactTypes.includes(contactType)) {
+    throw new Error(`Filter values are: ${contactTypes.join(', ')}`);
+  }
+
+  return contactType ? { contactType } : {};
 };
 
 export default parseContactFilterParams;
