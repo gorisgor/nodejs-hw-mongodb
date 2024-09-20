@@ -5,7 +5,6 @@ const setupSession = (res, session) => {
     httpOnly: true,
     expire: new Date(Date.now() + session.refreshTokenValidUntil),
   });
-
   res.cookie('sessionId', session._id, {
     httpOnly: true,
     expire: new Date(Date.now() + session.refreshTokenValidUntil),
@@ -24,7 +23,6 @@ export const signupController = async (req, res) => {
 
 export const signinController = async (req, res) => {
   const session = await signin(req.body);
-
   setupSession(res, session);
 
   res.json({
@@ -42,7 +40,6 @@ export const refreshController = async (req, res) => {
     refreshToken,
     sessionId,
   });
-
   setupSession(res, session);
 
   res.json({
@@ -62,6 +59,5 @@ export const signoutController = async (req, res) => {
 
   res.clearCookie('sessionId');
   res.clearCookie('refreshToken');
-
   res.status(204).send();
 };
