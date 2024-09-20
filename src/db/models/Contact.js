@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, SchemaType, model } from 'mongoose';
 
 import { handleSaveError, setUpdateOptions } from './hooks.js';
 
@@ -23,6 +23,11 @@ const contactSchema = new Schema(
     contactType: {
       type: String,
       enum: ['work', 'personal', 'home'],
+      required: true,
+    },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'user',
       required: true,
     },
   },
