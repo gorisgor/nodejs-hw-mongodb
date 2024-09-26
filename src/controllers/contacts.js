@@ -10,7 +10,7 @@ import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
 import { sortFields } from '../db/models/Contact.js';
 import parseContactFilterParams from '../utils/filters/parseContactFilterParams.js';
-
+let photo;
 export const getAllContactsController = async (req, res) => {
   const { perPage, page } = parsePaginationParams(req.query);
   const { sortBy, sortOrder } = parseSortParams({ ...req.query, sortFields });
@@ -49,6 +49,10 @@ export const getContactByIdController = async (req, res) => {
 };
 
 export const addContactController = async (req, res) => {
+
+  if(req.file) {
+    photo = await saveFileToCloudinary(req.file, "photo");
+    }
   const { _id: userId } = req.user;
   const { name, phoneNumber, email, isFavourite, contactType } = req.body;
   if (!name || !phoneNumber || !contactType) {
@@ -66,6 +70,9 @@ export const addContactController = async (req, res) => {
 };
 
 export const patchContactController = async (req, res) => {
+  if(req.file) {
+    photo = await saveFileToCloudinary(req.file, "photo");
+    }
   const { id } = req.params;
   const { _id: userId } = req.user;
   const result = await updateContact({ _id: id, userId }, req.body);
