@@ -5,6 +5,7 @@ import {
   signout,
   sendResetEmail,
   resetPassword,
+  signinOrSignupWithGoogleOAuth,
 } from '../services/auth.js';
 import { generateGoogleOAuthUrl } from '../utils/googleOAuth2.js';
 
