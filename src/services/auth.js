@@ -168,7 +168,7 @@ export const signinOrSignupWithGoogleOAuth = async (code) => {
         const hashPassword = await bcrypt.hash(password, 10);
         user = await UserCollection.create({
             email: payload.email,
-            username: payload.name,
+            name: payload.name,
             password: hashPassword,
             verify: true,
         });
