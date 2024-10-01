@@ -2,7 +2,7 @@ import { OAuth2Client } from "google-auth-library";
 import * as path from 'node:path';
 import { readFile } from 'fs/promises';
 
-import {env} from './env.js';
+import {env} from '../utils/env.js';
 
 const clientId = env("GOOGLE_OAUTH_CLIENT_ID");
 const clientSecret = env('GOOGLE_OAUTH_CLIENT_SECRET');
