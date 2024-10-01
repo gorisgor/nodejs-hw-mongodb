@@ -7,7 +7,8 @@ import {
   signoutController,
   resetEmailController,
   resetPasswordController,
-  getGoogleOAuthUrlController
+  getGoogleOAuthUrlController,
+  loginWithGoogleOAuthController
 } from '../controllers/auth.js';
 
 import ctrlWrapper from '../utils/ctrlWrapper.js';
