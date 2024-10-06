@@ -25,7 +25,7 @@ parameters:
     schema:
       type: string
       default: "name"
-      example: "name"  
+      example: "name"
     description: Field to sort by (e.g., name, contactType). Default is name.
   - in: query
     name: sortOrder
@@ -99,4 +99,4 @@ responses:
                   type: boolean
                   example: true
   '401':
-    $ref: '../../components/responses/401.yaml'
+    $ref: '../../components/responses/404.yaml'
