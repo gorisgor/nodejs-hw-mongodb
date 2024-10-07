@@ -24,16 +24,15 @@ parameters:
     name: sortBy
     schema:
       type: string
-      default: "name"
       example: "name"
-    description: Field to sort by (e.g., name, contactType). Default is name.
+    description: Field to sort by (e.g., name, contactType)
   - in: query
     name: sortOrder
     schema:
       type: string
       enum: ['asc', 'desc']
       example: 'asc'
-    description: Order is ascending (asc) or descending (desc). Default is asc.
+    description: Order is ascending (asc) or descending (desc)
   - in: query
     name: contactType
     schema:
@@ -100,3 +99,5 @@ responses:
                   example: true
   '401':
     $ref: '../../components/responses/404.yaml'
+  '500':
+    $ref: '../../components/responses/500.yaml'

@@ -1,4 +1,4 @@
-description: Bad request
+description: Something went wrong
 content:
   application/json:
     schema:
@@ -10,10 +10,10 @@ content:
       properties:
         status:
           type: integer
-          example: 400
+          example: 500
         message:
           type: string
-          example: Bad request
+          example: Something went wrong
         data:
           type: object
           required:
@@ -21,4 +21,4 @@ content:
           properties:
             message:
               type: string
-              example: 'Bad request'
+              example: 'Something went wrong'

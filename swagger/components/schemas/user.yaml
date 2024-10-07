@@ -1,0 +1,24 @@
+type: object
+required:
+  - name
+  - email
+  - _id
+properties:
+  name:
+    description: "User's name"
+    type: string
+    example: 'Poly'
+  email:
+    description: "User's email"
+    type: string
+    example: 'poly@email.com'
+  _id:
+    description: "User's id"
+    type: string
+    example: '6703be95451dbda9831ca755'
+  createdAt: 
+    description: "Date of register user"
+    example: "2024-10-07T10:57:25.176Z"
+  updatedAt: 
+    description: "Date of updating user"
+    example: "2024-10-07T10:57:25.176Z"
