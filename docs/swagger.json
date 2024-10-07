@@ -513,6 +513,392 @@
           }
         }
       }
+    },
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Create user",
+        "operationId": "createUser",
+        "description": "Create a user with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "name": {
+                    "description": "User's name",
+                    "type": "string",
+                    "example": "Mango"
+                  },
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "example": "poly@email.com"
+                  },
+                  "password": {
+                    "description": "Users's password",
+                    "type": "string",
+                    "example": "SuperPwd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Creates a user",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 201
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully registered a user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "$ref": "#/components/responses/409"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Login user",
+        "operationId": "loginUser",
+        "description": "Login a user with payload",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email",
+                  "password"
+                ],
+                "properties": {
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "example": "poly@email.com"
+                  },
+                  "password": {
+                    "description": "Users's password",
+                    "type": "string",
+                    "example": "SuperPwd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User logged on",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully logged in an user!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/session"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Refresh user's accessToken",
+        "operationId": "refreshUser",
+        "description": "Refresh a user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User logged on",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Successfully refreshed a session!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "$ref": "#/components/schemas/session"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Log out user",
+        "operationId": "logoutUser",
+        "description": "Log out a user",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No content"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/send-reset-email": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Send reset email",
+        "operationId": "sendResetEmail",
+        "description": "Send reset email",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "email"
+                ],
+                "properties": {
+                  "email": {
+                    "description": "User's email",
+                    "type": "string",
+                    "example": "poly@email.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reset password email has been successfully sent.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Reset password email has been successfully sent."
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
+    },
+    "/auth/reset-pwd": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Reset password",
+        "operationId": "resetPwd",
+        "description": "Send reset email",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "token",
+                  "password"
+                ],
+                "properties": {
+                  "token": {
+                    "description": "Token from reset email",
+                    "type": "string",
+                    "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NzAzZDJmOTY2NTUxOWRjZmM4NTUxMGEiLCJlbWFpbCI6InZpbWFqZTExNjFAYWRhbWJyYS5jb20iLCJpYXQiOjE3MjgzMDQxMzcsImV4cCI6MTcyODMwNTAzN30.fIs954CM6b3DcCBkP84eD1sGkCooW_j_m-B00_FQL3g"
+                  },
+                  "password": {
+                    "description": "Users's NEW password",
+                    "type": "string",
+                    "example": "NewSuperPwd"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reset user's password with token from reset email.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "status",
+                    "message",
+                    "data"
+                  ],
+                  "properties": {
+                    "status": {
+                      "type": "integer",
+                      "example": 200
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Password was successfully reset!"
+                    },
+                    "data": {
+                      "type": "object",
+                      "example": {}
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "$ref": "#/components/responses/404"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -576,6 +962,52 @@
             "description": "Link to contact's photo",
             "type": "string",
             "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+          }
+        }
+      },
+      "user": {
+        "type": "object",
+        "required": [
+          "name",
+          "email",
+          "_id"
+        ],
+        "properties": {
+          "name": {
+            "description": "User's name",
+            "type": "string",
+            "example": "Poly"
+          },
+          "email": {
+            "description": "User's email",
+            "type": "string",
+            "example": "poly@email.com"
+          },
+          "_id": {
+            "description": "User's id",
+            "type": "string",
+            "example": "6703be95451dbda9831ca755"
+          },
+          "createdAt": {
+            "description": "Date of register user",
+            "example": "2024-10-07T10:57:25.176Z"
+          },
+          "updatedAt": {
+            "description": "Date of updating user",
+            "example": "2024-10-07T10:57:25.176Z"
+          }
+        }
+      },
+      "session": {
+        "type": "object",
+        "required": [
+          "accessToken"
+        ],
+        "properties": {
+          "accessToken": {
+            "description": "User's accessToken",
+            "type": "string",
+            "example": "kmfggmNvJWFBwy8AjK91fa/K6iPqMN3axcaYdrjE"
           }
         }
       }
@@ -684,6 +1116,43 @@
                     "message": {
                       "type": "string",
                       "example": "Contact not found"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "409": {
+        "description": "Conflict",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "status",
+                "message",
+                "data"
+              ],
+              "properties": {
+                "status": {
+                  "type": "integer",
+                  "example": 409
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Something went wrong"
+                },
+                "data": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "example": "Email in use"
                     }
                   }
                 }
