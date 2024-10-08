@@ -39,9 +39,9 @@ requestBody:
             type: boolean
             example: false
           photo:
-            description: "Link to contact's photo"
+            description: "Student's photo"
             type: string
-            example: https://res.cloudinary.com/uqwgdu/image/upload/image.png
+            format: binary
 responses:
   '200':
     description: 'Get contact by id'
