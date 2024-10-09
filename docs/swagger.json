@@ -146,7 +146,7 @@
                     "type": "string",
                     "example": "mango@email.com"
                   },
-                  "isFavorite": {
+                  "isFavourite": {
                     "description": "Is contact favorite",
                     "type": "boolean",
                     "example": false
